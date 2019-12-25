@@ -17,7 +17,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = f"{ Config.SQLALCHEMY_DATABASE_URI +'_test'}"
+    SQLALCHEMY_DATABASE_URI = "postgresql://harry:test@127.0.0.1:5432/metamorphosis_test"
     DEBUG = True
 
 class StagingConfig(Config):

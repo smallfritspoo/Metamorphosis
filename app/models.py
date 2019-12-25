@@ -10,8 +10,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     job_title = db.Column(db.String(45))
     password_hash = db.Column(db.String(128))
-    projects = db.relationship('UserProjects', backref='user_projects', lazy='dynamic')
-    tickets = db.relationship('Tickets', backref='user_tickets', lazy='dynamic')
 
     def __repr__(self) -> str:
         return f"<User: {self.username}>"
@@ -33,6 +31,9 @@ class UserProjects(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', foreign_keys=[user_id])
+    creator = db.relationship('User', foreign_keys=[created_by])
+
 
     def __repr__(self) -> str:
         return f"<UserProject: {self.user_id}:{self.project_id}>"
@@ -41,9 +42,11 @@ class UserProjects(db.Model):
 class UserPermissions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    permission_id = db.Column(db.Integer, db.ForeignKey('permissions.id'))
+    permission_id = db.Column(db.Integer, db.ForeignKey('permission.id'))
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', foreign_keys=[user_id])
+    creator = db.relationship('User', foreign_keys=[created_by])
 
     def __repr__(self) -> str:
         return f"<UserPermissions: {self.user_id}:{self.permission_id}>"
