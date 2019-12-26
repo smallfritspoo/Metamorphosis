@@ -34,7 +34,6 @@ class UserProjects(db.Model):
     user = db.relationship('User', foreign_keys=[user_id])
     creator = db.relationship('User', foreign_keys=[created_by])
 
-
     def __repr__(self) -> str:
         return f"<UserProject: {self.user_id}:{self.project_id}>"
 
