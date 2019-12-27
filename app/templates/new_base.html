@@ -1,0 +1,37 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+{%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}{{title|default}}{% endblock title %}</title>
+    {%- block metas %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- endblock metas %}
+    {%- block styles %}
+    {%- endblock styles %}
+    {%- endblock head %}
+  </head>
+<body{% block body_attribs %}{% endblock body_attribs %}>
+{% block body -%}
+  {% block pre_setup %}{% endblock pre_setup %}
+  <!-- Navbar -->
+    {%- block navbar %}{%- endblock navbar %}
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+    {%- block sidebar %}{%- endblock sidebar %}
+  <!-- /.sidebar -->
+  <!-- Content Wrapper. Contains page content -->
+    {%- block content %}{%- endblock content %}
+  <!-- /.content-wrapper -->
+    {%- block footer %}{%- endblock footer %}
+  {% block post_setup %}{% endblock post_setup %}
+{%- block scripts %}{%- endblock scripts %}
+{%- endblock body %}
+</body>
+{%- endblock html %}
+</html>
+{%- endblock doc -%}

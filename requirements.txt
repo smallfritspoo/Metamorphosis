@@ -12,3 +12,6 @@ WTForms
 Werkzeug
 python-coveralls
 nose
+requests
+oauthlib
+pyopenssl

@@ -8,12 +8,14 @@ from flask_bootstrap import Bootstrap
 # local import
 from config import app_config
 
+
 # initialize sql-alchemy
 db = SQLAlchemy()
 login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Please login to access this page'
 bootstrap = Bootstrap()
+
 
 from flask import request, jsonify, abort
 

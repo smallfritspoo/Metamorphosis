@@ -1,14 +1,23 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_login import current_user, login_required
 from app.models import User
 from app.main import bp
+
+
+def get_num_users() -> int:
+    return len(User.query.all())
 
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        return render_template('index.html',
+                               title='metamorphosis',
+                               num_users=get_num_users(),)
+    else:
+        return redirect(url_for('auth.login'))
 
 
 #  @bp.route('/user/<username>')
