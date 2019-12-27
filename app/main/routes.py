@@ -15,7 +15,8 @@ def index():
     if current_user.is_authenticated:
         return render_template('index.html',
                                title='metamorphosis',
-                               num_users=get_num_users(),)
+                               num_users=get_num_users(),
+                               user=current_user)
     else:
         return redirect(url_for('auth.login'))
 

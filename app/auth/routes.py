@@ -11,12 +11,15 @@ import json
 
 oauth_client = WebApplicationClient('')
 
+
 def get_google_provider_cfg():
     return requests.get("https://accounts.google.com/.well-known/openid-configuration").json()
+
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('auth/login.html', title='Metamorphosis | Login')
+
 
 @bp.route('/g-login', methods=['GET', 'POST'])
 def g_login():
@@ -32,6 +35,7 @@ def g_login():
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
+
 
 @bp.route("/g-login/callback")
 def g_callback():
@@ -91,21 +95,22 @@ def g_callback():
     # Send user back to homepage
     return redirect(url_for("main.index"))
 
-#def login():
-#    if current_user.is_authenticated:
-#        return redirect(url_for('main.index'))
-#    form = LoginForm()
-#    if form.validate_on_submit():
-#        user = User.query.filter_by(username=form.username.data).first()
-#        if user is None or not user.check_password(form.password.data):
-#            flash('Invalid username or password')
-#            return redirect(url_for('auth.login'))
-#        login_user(user, remember=form.remember_me.data)
-#        next_page = request.args.get('next')
-#        if not next_page or url_parse(next_page).netloc != '':
-#            next_page = url_for('main.index')
-#        return redirect(next_page)
-#    return render_template('auth/login.html', title='Sign In', form=form)
+
+#  def login():
+#      if current_user.is_authenticated:
+#          return redirect(url_for('main.index'))
+#      form = LoginForm()
+#      if form.validate_on_submit():
+#          user = User.query.filter_by(username=form.username.data).first()
+#          if user is None or not user.check_password(form.password.data):
+#              flash('Invalid username or password')
+#              return redirect(url_for('auth.login'))
+#          login_user(user, remember=form.remember_me.data)
+#          next_page = request.args.get('next')
+#          if not next_page or url_parse(next_page).netloc != '':
+#              next_page = url_for('main.index')
+#          return redirect(next_page)
+#      return render_template('auth/login.html', title='Sign In', form=form)
 
 
 @bp.route('/logout')
