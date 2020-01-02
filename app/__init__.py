@@ -29,11 +29,11 @@ def create_app(config_name):
     login.init_app(app)
     bootstrap.init_app(app)
 
+    from app.bug_tickets import bp as bug_tickets_bp
+    app.register_blueprint(bug_tickets_bp, url_prefix='/bug_tickets')
+
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
-
-    from app.tickets import bp as tickets_bp
-    app.register_blueprint(tickets_bp, url_prefix='/tickets')
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)

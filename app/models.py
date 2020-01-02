@@ -11,6 +11,10 @@ class User(UserMixin, db.Model):
     job_title = db.Column(db.String(45))
     password_hash = db.Column(db.String(128))
 
+    @staticmethod
+    def get_all_users():
+        return User.query.all()
+
     def __repr__(self) -> str:
         return f"<User: {self.username}>"
 
@@ -58,6 +62,7 @@ class Tickets(db.Model):
     title = db.Column(db.String(128))
     priority = db.Column(db.String(128))
     assigned_to_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    ticket_contents = db.Column(db.Text)
 
     def __repr__(self) -> str:
         return f"<Ticket: {self.title}>"
@@ -89,6 +94,10 @@ class Project(db.Model):
     project_name = db.Column(db.String(128), unique=True)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    @staticmethod
+    def get_all_projects():
+        return Project.query.all()
 
     def __repr__(self) -> str:
         return f"<Project: {self.project_name}>"

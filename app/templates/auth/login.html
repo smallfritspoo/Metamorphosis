@@ -109,7 +109,7 @@ class="hold-transition login-page"
 <!-- jQuery -->
 <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ url_for('static', filename='plugins/bootstrbootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="diadminlte.min.js"></script>
+<script src="{{ url_for('static', filename='dist/js/adminlte.min.js') }}"></script>
 {% endblock scripts %}
